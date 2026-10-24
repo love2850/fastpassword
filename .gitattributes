@@ -1,0 +1,13 @@
+# 统一换行符，避免 Windows 上 checkout 时满屏 "LF will be replaced by CRLF"
+* text=auto eol=lf
+
+# 批处理必须用 CRLF：某些 cmd 解析器对 LF 结尾的 goto/label 会出错
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# 二进制，别做任何转换
+*.png binary
+*.ico binary
+*.zip binary
+*.dll binary
+*.exe binary

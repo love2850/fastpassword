@@ -1,0 +1,52 @@
+## 构建产物
+bin/
+obj/
+*.user
+*.suo
+*.lock.json.bak
+
+## 发布产物（打包.bat 生成，动辄几十 MB，绝不入库）
+dist/
+publish/
+artifacts/
+.publish/
+*.zip
+
+## 探查项目（临时，不参与正式构建）
+_probe_argon/
+_probe_multitfm/bin/
+_probe_multitfm/obj/
+_probe_stability/bin/
+_probe_stability/obj/
+_probe_winui/bin/
+_probe_winui/obj/
+
+## 运行时产物
+@AutomationLog.txt
+*.log
+logs/
+
+## 保险库与配置——绝不入库
+## data\ 里是真实的密码库、settings.json（含本机习惯）、selfcheck.json（含机器指纹）
+## 还有日志。误提交等于把使用者的密码库连同机器指纹一起公开。
+data/
+*.db
+*.db-wal
+*.db-shm
+*.db-journal
+settings.json
+selfcheck.json
+*.broken
+
+## 工作区记忆与本地会话记录（含对话内容，只属于本机）
+.workbuddy/
+
+## 探查用的临时工程（不参与正式构建）
+_probe_*/
+
+## 第三方参考源码（原作者未附 LICENSE，不适合再分发；本地保留仅供对照）
+reference/
+
+## 其他
+.vs/
+.idea/

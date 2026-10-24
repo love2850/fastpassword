@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="FastPassword.App.Views.TipsWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--
+        与设置窗同一套外观：无标题栏 + Mica + 自定义拖拽区。
+
+        为什么不用 ContentDialog：它在主窗里拿不到完整的定位区域（主窗用
+        ExtendsContentIntoTitleBar + 自定义标题栏，右侧还有 138px 给系统按钮），
+        实际可用区比窗口小一圈，于是对话框被摆到偏左上，改尺寸改不回来。
+        独立窗口由 Win32 SetWindowPos 直接居中，位置是确定的。
+    -->
+    <Grid x:Name="ShellGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="TitleBarArea" Grid.Row="0" Height="32" Background="Transparent">
+            <TextBlock Text="使用须知"
+                       Margin="16,0,0,0"
+                       FontSize="12"
+                       VerticalAlignment="Center"
+                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+        </Grid>
+
+        <Grid Grid.Row="1" Padding="24,4,24,20">
+            <Grid.KeyboardAccelerators>
+                <KeyboardAccelerator Key="Escape" Invoked="OnEscapePressed" />
+            </Grid.KeyboardAccelerators>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- 正常字号下 7 条全展开约 350，窗口给到 560 高不会出滚动条；
+                 滚动条留给用户把系统文字放大到 125% / 150% 的情况。 -->
+            <ScrollViewer Grid.Row="0"
+                          HorizontalScrollBarVisibility="Disabled"
+                          VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollMode="Disabled"
+                          VerticalScrollMode="Auto">
+
+                <StackPanel Spacing="12">
+
+                    <StackPanel Spacing="2">
+                        <TextBlock Text="记忆密码没有找回手段" FontSize="12" FontWeight="SemiBold" />
+                        <TextBlock Text="忘了就等于所有站点密码作废。设置前先确认你能记住它——它不写在任何地方，也没有客服。"
+                                   FontSize="12" TextWrapping="Wrap" Opacity="0.85" />
+                    </StackPanel>
+
+                    <StackPanel Spacing="2">
+                        <TextBlock Text="密码不存储，随时可以算回来" FontSize="12" FontWeight="SemiBold" />
+                        <TextBlock Text="同一个记忆密码 + 区分代号 + 账号，永远得到同一个密码。清单只是便利贴，拷走也打不开。"
+                                   FontSize="12" TextWrapping="Wrap" Opacity="0.85" />
+                    </StackPanel>
+
+                    <StackPanel Spacing="2">
+                        <TextBlock Text="备份密钥只显示一次" FontSize="12" FontWeight="SemiBold" />
+                        <TextBlock Text="首次设置后会显示一串 8 组密钥，立刻抄下来。忘了记忆密码时，解锁页「忘记记忆密码？」凭它恢复。"
+                                   FontSize="12" TextWrapping="Wrap" Opacity="0.85" />
+                    </StackPanel>
+
+                    <StackPanel Spacing="2">
+                        <TextBlock Text="数据在程序目录的 data\ 里" FontSize="12" FontWeight="SemiBold" />
+                        <TextBlock Text="整个文件夹拷走就是一份完整实例，换台机器仍需同一个记忆密码。删掉它是不可恢复的。"
+                                   FontSize="12" TextWrapping="Wrap" Opacity="0.85" />
+                    </StackPanel>
+
+                    <StackPanel Spacing="2">
+                        <TextBlock Text="主密码别将就" FontSize="12" FontWeight="SemiBold" />
+                        <TextBlock Text="8 位随手想的密码，在显卡面前撑不过一周。宁可长一点、怪一点。"
+                                   FontSize="12" TextWrapping="Wrap" Opacity="0.85" />
+                    </StackPanel>
+
+                    <StackPanel Spacing="2">
+                        <TextBlock Text="快捷键" FontSize="12" FontWeight="SemiBold" />
+                        <TextBlock Text="Ctrl+C 复制所选条目的密码，Ctrl+B 复制账号——只在本窗口内生效，不会抢你在别处的 Ctrl+C。Ctrl+Alt+P 才是全局呼出窗口的热键。"
+                                   FontSize="12" TextWrapping="Wrap" Opacity="0.85" />
+                    </StackPanel>
+
+                    <StackPanel Spacing="2">
+                        <TextBlock Text="剪贴板" FontSize="12" FontWeight="SemiBold" />
+                        <TextBlock Text="密码默认 30 秒后自动清除，且不进入 Win+V 历史；可在设置里改成 10 / 15 秒或不清除。"
+                                   FontSize="12" TextWrapping="Wrap" Opacity="0.85" />
+                    </StackPanel>
+
+                </StackPanel>
+            </ScrollViewer>
+
+            <Button Grid.Row="1"
+                    Content="确定"
+                    MinWidth="96"
+                    Margin="0,16,0,0"
+                    HorizontalAlignment="Right"
+                    Style="{StaticResource AccentButtonStyle}"
+                    Click="OnConfirm" />
+        </Grid>
+    </Grid>
+</Window>
